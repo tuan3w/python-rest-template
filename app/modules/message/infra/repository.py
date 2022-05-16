@@ -19,28 +19,30 @@ class MessageInDb(Base):
 
 
 class SQLMessageRepository(SQLRepository, MessageRepository):
-    def get_thread_messages(self, thread_id: str):
-        with self.session_factory() as session:
+    def get_thread_messages(self, thread_id: str, shared_session=None):
+        with self.session_factory(shared_session) as session:
             messages = session.query(MessageInDb).filter(
                 MessageInDb.thread_id == thread_id).all()
             mapped_messages = [Message.from_orm(msg) for msg in messages]
             return mapped_messages
 
-    def create_message(self, msg: Message) -> Message:
-        with self.session_factory() as session:
+    def create_message(self, msg: Message, shared_session=None) -> Message:
+        with self.session_factory(shared_session) as session:
             db_item = MessageInDb(**msg.dict())
             session.add(db_item)
-            session.commit()
+
+            if not shared_session:
+                session.commit()
             session.refresh(db_item)
             return Message.from_orm(db_item)
 
-    def delete_message(self, msg_id: int):
-        with self.session_factory() as session:
+    def delete_message(self, msg_id: int, shared_session=None):
+        with self.session_factory(shared_session) as session:
             session.query(MessageInDb).filter(
                 MessageInDb.id == msg_id).delete()
 
-    def get_by_id(self, msg_id: int) -> Optional[Message]:
-        with self.session_factory() as session:
+    def get_by_id(self, msg_id: int, shared_session=None) -> Optional[Message]:
+        with self.session_factory(shared_session) as session:
             msg = session.query(MessageInDb).filter(
                 MessageInDb.id == msg_id
             ).first()

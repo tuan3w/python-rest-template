@@ -29,38 +29,44 @@ class SQLThreadRepository(SQLRepository, ThreadRepository):
                 ChatThreadInDb.owner_id == user_id).all()
             return [ChatThread.from_orm(thread) for thread in threads]
 
-    def get_by_id(self, thread_id: str) -> Optional[ChatThread]:
-        with self.session_factory() as session:
+    def get_by_id(self, thread_id: str, shared_session=None) -> Optional[ChatThread]:
+        with self.session_factory(shared_session) as session:
             thread = session.query(ChatThreadInDb).filter(
                 ChatThreadInDb.id == thread_id).one_or_none()
             if not thread:
                 return None
             return ChatThread.from_orm(thread)
 
-    def create(self, thread: ChatThread) -> ChatThread:
-        with self.session_factory() as session:
+    def create(self, thread: ChatThread, shared_session=None) -> ChatThread:
+        with self.session_factory(shared_session) as session:
             item_db = ChatThreadInDb(**thread.dict())
             session.add(item_db)
-            session.commit()
+
+            if not shared_session:
+                session.commit()
+
             session.refresh(item_db)
 
             return ChatThread.from_orm(item_db)
 
-    def delete(self, thread_id: int):
-        with self.session_factory() as session:
+    def delete(self, thread_id: int, shared_session=None):
+        with self.session_factory(shared_session) as session:
             session.query(ChatThreadInDb).filter(
                 ChatThreadInDb.id == thread_id).delete()
 
-    def get_thread_members(self, thread_id: int) -> List[ChatThreadMember]:
-        with self.session_factory() as session:
+            if not shared_session:
+                session.commit()
+
+    def get_thread_members(self, thread_id: int, shared_session=None) -> List[ChatThreadMember]:
+        with self.session_factory(shared_session) as session:
             thread_members = session.query(ChatThreadMemberInDb).filter(
                 ChatThreadMemberInDb.thread_id == thread_id
             ).all()
 
             return [ChatThreadMember.from_orm(member) for member in thread_members]
 
-    def get_thread_member(self, thread_id: int, user_id: int) -> Optional[ChatThreadMember]:
-        with self.session_factory() as session:
+    def get_thread_member(self, thread_id: int, user_id: int, shared_session=None) -> Optional[ChatThreadMember]:
+        with self.session_factory(shared_session) as session:
             thread_member = session.query(ChatThreadMemberInDb).filter(
                 ChatThreadMemberInDb.user_id == user_id
             ).filter(
@@ -70,20 +76,26 @@ class SQLThreadRepository(SQLRepository, ThreadRepository):
                 return None
             return ChatThreadMember.from_orm(thread_member)
 
-    def remove_thread_member(self, thread_id: int, user_id: int):
-        with self.session_factory() as session:
+    def remove_thread_member(self, thread_id: int, user_id: int, shared_session=None):
+        with self.session_factory(shared_session) as session:
             session.query(ChatThreadMemberInDb).filter(
                 ChatThreadMemberInDb.thread_id == thread_id
             ).filter(
                 ChatThreadMemberInDb.user_id == user_id
             ).delete()
 
-    def add_thread_member(self, thread_id: int, user_id: int, role: str):
-        with self.session_factory() as session:
+            if not shared_session:
+                session.commit()
+
+    def add_thread_member(self, thread_id: int, user_id: int, role: str, shared_session=None):
+        with self.session_factory(shared_session) as session:
             member = ChatThreadMemberInDb(
                 user_id=user_id, thread_id=thread_id, role=role)
             session.add(member)
-            session.commit()
+
+            if not shared_session:
+                session.commit()
+
             session.refresh(member)
 
             return ChatThreadMember.from_orm(member)

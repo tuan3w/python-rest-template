@@ -7,6 +7,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session
 
 from app.core.conf import AppConf
+from app.core.exceptions import DatabaseError
 
 logger = logging.getLogger(__name__)
 
@@ -29,13 +30,18 @@ class Database:
         Base.metadata.create_all(self._engine)
 
     @contextmanager
-    def session(self) -> Callable[..., AbstractContextManager[Session]]:
+    def session(self, session: Session = None) -> Callable[..., AbstractContextManager[Session]]:
+        if session is not None:
+            # user has to handle session themselve
+            yield session
+
         session: Session = self._session_factory()
+        print('create new session')
         try:
             yield session
-        except Exception:
+        except Exception as e:
             logger.exception("Session rollback because of exception")
             session.rollback()
-            raise
+            raise DatabaseError(error_details=e)
         finally:
             session.close()
