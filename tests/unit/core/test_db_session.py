@@ -4,11 +4,6 @@ from sqlalchemy import Column, Integer
 from tests.utils import init_test_container
 
 
-class InvalidModel(Base):
-    __tablename__ = 'notfound'
-    id = Column(Integer, primary_key=True)
-
-
 def test_db_session_rollback():
     container = init_test_container()
     db = container.db()
