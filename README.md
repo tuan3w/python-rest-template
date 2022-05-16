@@ -1,6 +1,6 @@
 # python-rest-template
 
-A clean template for REST project.
+A clean Python emplate for your next REST projects.
 
 
 ## Setup
