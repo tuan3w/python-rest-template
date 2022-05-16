@@ -1,0 +1,8 @@
+{
+	"files.exclude": {
+		"**/__pycache__": true
+    },
+    "files.watcherExclude": {
+        "**/__pycache__": true
+    }
+}

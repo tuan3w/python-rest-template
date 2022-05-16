@@ -1,0 +1,68 @@
+# Vietnamese translations for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-05-16 14:49+0700\n"
+"PO-Revision-Date: 2022-05-13 22:11+0700\n"
+"Last-Translator: \n"
+"Language: vi\n"
+"Language-Team: vi <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: app/core/exceptions.py:12
+msgid "Internal error"
+msgstr "Lỗi hệ thống đã xảy ra"
+
+#: app/core/exceptions.py:44
+msgid "User isn't in this thread"
+msgstr "Người dùng không ở trong luồng chat này"
+
+#: app/core/exceptions.py:49 app/modules/auth/exceptions.py:11
+msgid "User not found"
+msgstr "Người dùng không tồn tại"
+
+#: app/core/exceptions.py:55
+msgid "You don't have permission to thread"
+msgstr "Bạn không có quyền trong luồng chat"
+
+#: app/core/exceptions.py:61
+msgid "Internal server error"
+msgstr "Lỗi server đã xảy ra"
+
+#: app/core/exceptions.py:66
+msgid "Unauthorized"
+msgstr "Chưa đăng nhập"
+
+#: app/core/exceptions.py:72
+msgid "Invalid parameters"
+msgstr "Tham số hệ thống sai"
+
+#: app/modules/auth/exceptions.py:6
+msgid "User existed"
+msgstr "Người dùng đã tồn tại"
+
+#: app/modules/auth/exceptions.py:16
+msgid "Invalid password"
+msgstr ""
+
+#: app/modules/message/exceptions.py:9
+#, fuzzy
+msgid "Thread not found"
+msgstr "Người dùng không ở trong luồng chat này"
+
+#: app/modules/message/exceptions.py:12
+msgid "Message not found"
+msgstr ""
+
+#~ msgid "You dont have permission to this thread"
+#~ msgstr "Bạn không có quyền truy cập vào hội thoại này"
+

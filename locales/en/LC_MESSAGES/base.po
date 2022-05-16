@@ -1,0 +1,67 @@
+# English translations for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-05-16 14:49+0700\n"
+"PO-Revision-Date: 2022-05-13 21:57+0700\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: app/core/exceptions.py:12
+msgid "Internal error"
+msgstr ""
+
+#: app/core/exceptions.py:44
+msgid "User isn't in this thread"
+msgstr ""
+
+#: app/core/exceptions.py:49 app/modules/auth/exceptions.py:11
+msgid "User not found"
+msgstr ""
+
+#: app/core/exceptions.py:55
+msgid "You don't have permission to thread"
+msgstr ""
+
+#: app/core/exceptions.py:61
+msgid "Internal server error"
+msgstr ""
+
+#: app/core/exceptions.py:66
+msgid "Unauthorized"
+msgstr ""
+
+#: app/core/exceptions.py:72
+msgid "Invalid parameters"
+msgstr ""
+
+#: app/modules/auth/exceptions.py:6
+msgid "User existed"
+msgstr ""
+
+#: app/modules/auth/exceptions.py:16
+msgid "Invalid password"
+msgstr ""
+
+#: app/modules/message/exceptions.py:9
+msgid "Thread not found"
+msgstr ""
+
+#: app/modules/message/exceptions.py:12
+msgid "Message not found"
+msgstr ""
+
+#~ msgid "You dont have permission to this thread"
+#~ msgstr ""
+

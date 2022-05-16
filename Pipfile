@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+dependency-injector = {extras = ["yaml"], version = "*"}
+pydantic = "*"
+fastapi = {extras = ["all"], version = "*"}
+pybabel = "*"
+sqlalchemy = "*"
+bcrypt = "*"
+fastapi-jwt-auth = "*"
+pyjwt = "*"
+alembic = "*"
+uvicorn = "*"
+
+[dev-packages]
+autopep8 = "*"
+
+[requires]
+python_version = "3.9"
+
+[scripts]
+app = "uvicorn --log-level info main:app --reload"
