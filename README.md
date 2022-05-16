@@ -21,6 +21,12 @@ $ pipenv run app
 
 Now, you can check API docs located at http://localhost:8000/docs .
 
+## Test apps
+
+```bash
+$ pytest
+```
+
 ## Database migration
 
 ```bash

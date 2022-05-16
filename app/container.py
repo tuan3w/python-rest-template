@@ -41,15 +41,15 @@ class AppContainer(DeclarativeContainer):
     )
 
     # services
-    auth = providers.Container(
+    auth: AuthContainer = providers.Container(
         AuthContainer,
         app=app
     )
-    thread = providers.Container(
+    thread: ThreadContainer = providers.Container(
         ThreadContainer,
         app=app
     )
-    message = providers.Container(
+    message: MessageContainer = providers.Container(
         MessageContainer,
         app=app
     )
