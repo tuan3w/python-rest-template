@@ -15,7 +15,6 @@ from app.core.exceptions import UnAuthorized
 # SALT_KEY=gensalt()
 SALT_KEY = b'$2b$12$C7d8F1zsAN7BPTcR1KzIru'
 
-
 def check_password(password: str, hashed_password: str) -> bool:
     return checkpw(password.encode(), hashed_password.encode())
 
@@ -51,7 +50,7 @@ security = HTTPBearer()
 
 @inject
 def get_current_user(
-    credentials:  HTTPAuthorizationCredentials = Security(security),
+    credentials: HTTPAuthorizationCredentials = Security(security),
     app: AppConf = Depends(Provide[AppContainer.app_conf]),
 ) -> int:
     if credentials.credentials == '':

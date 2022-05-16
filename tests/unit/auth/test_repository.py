@@ -1,8 +1,4 @@
-import sys
-from app.container import AppContainer
-import pytest
 
-from app.core.database import Base
 from app.modules.auth.model import User
 from tests.utils import init_test_container
 
