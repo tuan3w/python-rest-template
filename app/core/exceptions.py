@@ -72,6 +72,11 @@ class ParamError(AppException):
     i18n_message = _('Invalid parameters')
     error = 'invalid_parameters'
 
+class DatabaseError(AppException):
+    http_code = 500
+    i18n_message = _('Internal server error')
+    error = 'internal_error'
+
 
 def add_error_handlers(app: FastAPI) -> None:
     @app.exception_handler(AppException)
