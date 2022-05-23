@@ -2,20 +2,20 @@ repos:
   - repo: local
     hooks:
     - id: autoflake
-      name: (Autoflake) Remove unused variables and imports
+      name: (Autoflake)\tRemove unused variables and imports
       entry: autoflake
       language: python
       args: ["--in-place", "--remove-all-unused-imports", "--remove-unused-variables", -r]
       types: [python]
       require_serial: true
     - id: isort
-      name: (Isort) Sorting import statements
+      name: (Isort)\tSorting import statements
       entry: bash -c 'isort "$@"; git add -u' --
       language: python
       args: ["--filter-files"]
       files: \.py$
     - id: black
-      name: (Black) Black Python code formatting
+      name: (Black)\tBlack Python code formatting
       entry: bash -c 'black "$@"; git add -u' --
       language: python
       types: [python]
