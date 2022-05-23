@@ -1,12 +1,4 @@
-
-from fastapi import APIRouter, status
-
-from app.modules.auth.router.login import login
-from app.modules.auth.router.me import me
-from app.modules.auth.router.register import register
-
 # router = APIRouter(prefix="/auth", tags=["auth"])
-from .router import router
 
 # router.add_api_route(
 #     path="/login",

@@ -1,7 +1,8 @@
+from dependency_injector import providers
 from dependency_injector.containers import DeclarativeContainer
-from dependency_injector import providers, containers
 
 from .usecases import *
+
 
 class AuthContainer(DeclarativeContainer):
     app = providers.Dependency()

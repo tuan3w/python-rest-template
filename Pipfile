@@ -22,6 +22,7 @@ pytest-cov = "*"
 isort = "*"
 autoflake = "*"
 pre-commit = "*"
+black = "*"
 
 [requires]
 python_version = "3.9"
