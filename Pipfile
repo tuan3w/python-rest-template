@@ -14,13 +14,19 @@ fastapi-jwt-auth = "*"
 pyjwt = "*"
 alembic = "*"
 uvicorn = "*"
-pytest = "*"
 
 [dev-packages]
 autopep8 = "*"
+pytest = "*"
+pytest-cov = "*"
+isort = "*"
+autoflake = "*"
+pre-commit = "*"
 
 [requires]
 python_version = "3.9"
 
 [scripts]
 app = "uvicorn --log-level info main:app --reload"
+test-cov-xml = "pytest --cov=app --cov-report=xml tests"
+test-cov = "pytest --cov=app tests"
