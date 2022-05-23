@@ -1,7 +1,7 @@
 import pytest
 
-from app.modules.auth.usecases import RegisterUserUsecase
 from app.modules.auth.exceptions import UserExistedError
+from app.modules.auth.usecases import RegisterUserUsecase
 from tests.utils import init_test_container
 
 
