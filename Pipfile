@@ -28,5 +28,6 @@ python_version = "3.9"
 
 [scripts]
 app = "uvicorn --log-level info main:app --reload"
-test-cov-xml = "pytest --cov=app --cov-report=xml tests"
-test-cov = "pytest --cov=app tests"
+test-cov-xml = "pytest --disable-warnings --cov=app --cov-report=xml tests"
+test-cov = "pytest --disable-warnings --cov=app tests"
+test = "pytest --disable-warnings tests"

@@ -1,14 +1,16 @@
+from dependency_injector.wiring import Provide, inject
 from fastapi import APIRouter, Depends
-from dependency_injector.wiring import inject, Provide
 from pydantic import BaseModel
+
 from app.container import AppContainer
 from app.core.jwt import get_current_user
 from app.modules.message.container import MessageContainer
-from .usecases import *
+
+from .usecases import (CreateThreadMessageUsecase, DeleteThreadMessageUsecase,
+                       GetThreadMessagesUsecase, Message)
 
 Container : MessageContainer = AppContainer.message
 router = APIRouter(prefix='/threads/{thread_id}/messages', tags=["messages"])
-
 
 @router.get("")
 @inject
