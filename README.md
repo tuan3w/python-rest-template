@@ -24,7 +24,18 @@ Now, you can check API docs located at http://localhost:8000/docs .
 ## Test apps
 
 ```bash
-$ pytest
+$ pipenv run test
+```
+
+To show code coverage, just run:
+
+```bash
+$ pipenv run test-cov
+```
+
+In order to show code coverage in VsCode, you will need to install [Coverage Gutters extension](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters) and then generate `coverage.xml` file via command:
+```bash
+$ pipenv run test-cov-xml
 ```
 
 ## Database migration

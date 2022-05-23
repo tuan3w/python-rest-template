@@ -1,8 +1,8 @@
-from multiprocessing import AuthenticationError
 from app.core.exceptions import UserNotFound
 from app.core.usecase import AppUsecase
-from app.modules.auth.exceptions import InvalidPassword, UserExistedError
+from app.modules.auth.exceptions import InvalidPassword
 from app.modules.auth.model import User
+
 from ..utils import check_password
 
 

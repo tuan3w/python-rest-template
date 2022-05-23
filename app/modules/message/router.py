@@ -1,13 +1,20 @@
+from dependency_injector.wiring import Provide, inject
 from fastapi import APIRouter, Depends
-from dependency_injector.wiring import inject, Provide
 from pydantic import BaseModel
+
 from app.container import AppContainer
 from app.core.jwt import get_current_user
 from app.modules.message.container import MessageContainer
-from .usecases import *
 
-Container : MessageContainer = AppContainer.message
-router = APIRouter(prefix='/threads/{thread_id}/messages', tags=["messages"])
+from .usecases import (
+    CreateThreadMessageUsecase,
+    DeleteThreadMessageUsecase,
+    GetThreadMessagesUsecase,
+    Message,
+)
+
+Container: MessageContainer = AppContainer.message
+router = APIRouter(prefix="/threads/{thread_id}/messages", tags=["messages"])
 
 
 @router.get("")
@@ -15,8 +22,7 @@ router = APIRouter(prefix='/threads/{thread_id}/messages', tags=["messages"])
 def get_thread_messages(
     thread_id: int,
     user_id: int = Depends(get_current_user),
-    usecase: GetThreadMessagesUsecase = Depends(
-        Provide[Container.get_thread_messages])
+    usecase: GetThreadMessagesUsecase = Depends(Provide[Container.get_thread_messages]),
 ):
     messages = usecase.get_thread_messages_for_user(thread_id, user_id)
     return {"data": messages}
@@ -31,12 +37,14 @@ class CreateThreadMessageRequest(BaseModel):
 def create_thread_message(
     thread_id: int,
     req: CreateThreadMessageRequest,
-    user_id: int=Depends(get_current_user),
+    user_id: int = Depends(get_current_user),
     usecase: CreateThreadMessageUsecase = Depends(
-        Provide[Container.create_thread_message])
+        Provide[Container.create_thread_message]
+    ),
 ):
     msg = usecase.create_message(
-        Message(thread_id=thread_id, user_id=user_id, message=req.message))
+        Message(thread_id=thread_id, user_id=user_id, message=req.message)
+    )
     return {"data": msg}
 
 
@@ -47,7 +55,8 @@ def delete_thread_message(
     message_id: int,
     user_id: int = Depends(get_current_user),
     usecase: DeleteThreadMessageUsecase = Depends(
-        Provide[Container.delete_thread_message])
+        Provide[Container.delete_thread_message]
+    ),
 ):
     usecase.delete_message_for_user(user_id, message_id)
     return {"data": {"success": True}}

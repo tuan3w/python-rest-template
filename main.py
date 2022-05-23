@@ -1,15 +1,14 @@
-from imp import reload
 import sys
+
+from dependency_injector.wiring import inject
 from fastapi import FastAPI
-from app.container import AppContainer
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.container import AppContainer
 from app.core.exceptions import add_error_handlers
-
 from app.modules.auth.router import router as auth_router
 from app.modules.message.router import router as msg_router
 from app.modules.thread.router import router as thread_router
-from dependency_injector.wiring import inject
 
 
 @inject
@@ -26,7 +25,7 @@ def create_app() -> FastAPI:
     add_error_handlers(app)
 
     app_container = AppContainer()
-    app_container.conf.from_yaml('./config.yaml')
+    app_container.conf.from_yaml("./config.yaml")
     app_container.init_resources()
 
     # NOTE: dependency_injector try to scan all directory in `app`

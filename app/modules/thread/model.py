@@ -1,6 +1,7 @@
-from optparse import Option
 from typing import Optional
+
 from pydantic import BaseModel
+
 
 class ChatThread(BaseModel):
     id: Optional[int]
@@ -9,6 +10,7 @@ class ChatThread(BaseModel):
 
     class Config:
         orm_mode = True
+
 
 class ChatThreadMember(BaseModel):
     id: Optional[int]
