@@ -1,3 +1,5 @@
+from asyncio.log import logger
+
 from fastapi import FastAPI, Request
 from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
@@ -38,18 +40,19 @@ class AppException(Exception):
         return res
 
 
-class UserNotInThread(AppException):
+class UserNotInThreadError(AppException):
     http_code = 403
     i18n_message = _("User isn't in this thread")
+    error = "user_not_in_thread"
 
 
-class UserNotFound(AppException):
+class UserNotFoundError(AppException):
     http_code = 404
     i18n_message = _("User not found")
     error = "user_not_found"
 
 
-class PermissionDenied(AppException):
+class PermissionDeniedError(AppException):
     http_code = 403
     i18n_message = _("You don't have permission to thread")
     error = "permission_denied"
@@ -61,7 +64,7 @@ class InternalServerError(AppException):
     error = "internal_error"
 
 
-class UnAuthorized(AppException):
+class UnAuthorizedError(AppException):
     http_code = 401
     i18n_message = _("Unauthorized")
     error = "unauthorized"
@@ -75,20 +78,26 @@ class ParamError(AppException):
 
 class DatabaseError(AppException):
     http_code = 500
-    i18n_message = _("Internal server error")
-    error = "internal_error"
+    i18n_message = _("An database error has occured")
+    error = "database_error"
+
+
+def _translate_error_message(err: AppException, req: Request):
+    # some http client will pass default header with default value
+    #  'en-Us,en;q=0.9'
+    locale = req.headers.get("accept-language", "vi")
+    err.translate(locale)
 
 
 def add_error_handlers(app: FastAPI) -> None:
     @app.exception_handler(AppException)
     async def handle_app_error_handler(req: Request, err: AppException):
-        # translate error
-        # TODO: fixme
-        # some http client will pass default header with default value
-        #  'en-Us,en;q=0.9'
-        # we need a way to find closest language
-        user_locale = req.headers.get("accept-language", "vi")
-        err.translate(user_locale)
+        if err.http_code >= 500:
+            # masked error
+            logger.error("Internal server error: {}".format(err.error_details))
+            err = InternalServerError(error_details=[])
+
+        _translate_error_message(err, req)
 
         return JSONResponse(
             status_code=err.http_code, content=jsonable_encoder(err.to_json())
@@ -99,21 +108,8 @@ def add_error_handlers(app: FastAPI) -> None:
         req: Request, err: RequestValidationError
     ):
         new_err = ParamError(error_details=err.errors())
-        user_locale = req.headers.get("accept-language", "vi")
-        new_err.translate(user_locale)
+        _translate_error_message(err, req)
 
         return JSONResponse(
             status_code=new_err.http_code, content=jsonable_encoder(new_err.to_json())
-        )
-
-    @app.exception_handler(Exception)
-    async def handle_internal_exception_handler(req: Request, err: Exception):
-        # FIXME: mask sql errors here
-        masked_err = InternalServerError(error_details=err)
-        user_locale = req.headers.get("accept-language", "vi")
-        masked_err.translate(user_locale)
-
-        return JSONResponse(
-            status_code=masked_err.http_code,
-            content=jsonable_encoder(masked_err.to_json()),
         )

@@ -5,9 +5,9 @@ Revises:
 Create Date: 2022-05-14 20:27:49.273970
 
 """
-from alembic import op
 import sqlalchemy as sa
 
+from alembic import op
 
 # revision identifiers, used by Alembic.
 revision = '96fd19d3ffae'
@@ -33,8 +33,8 @@ def upgrade():
         'thread_members',
         sa.Column('id', sa.Integer, primary_key=True),
         sa.Column('user_id', sa.Integer, sa.ForeignKey("users.id")),
-        sa.Column('thread_id', sa.Integer, sa.ForeignKey("threads.id"))
-        sa.columns('role', sa.String)
+        sa.Column('thread_id', sa.Integer, sa.ForeignKey("threads.id")),
+        sa.Column('role', sa.String)
     )
     op.create_table(
         'messages',
@@ -42,7 +42,7 @@ def upgrade():
         sa.Column('thread_id', sa.Integer, sa.ForeignKey("threads.id")),
         sa.Column('owner_id', sa.Integer, sa.ForeignKey("users.id")),
         sa.Column('message', sa.String),
-    )
+    )p
 
 
 def downgrade():

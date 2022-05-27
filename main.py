@@ -1,3 +1,4 @@
+import logging
 import sys
 
 from dependency_injector.wiring import inject
@@ -13,6 +14,10 @@ from app.modules.thread.router import router as thread_router
 
 @inject
 def create_app() -> FastAPI:
+    # disable sqlalchemy logging
+    logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    logging.getLogger("sqlalchemy").disabled = True
+
     app = FastAPI()
     app.add_middleware(
         CORSMiddleware,

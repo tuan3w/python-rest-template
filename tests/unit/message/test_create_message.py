@@ -1,6 +1,6 @@
 import pytest
 
-from app.core.exceptions import PermissionDenied
+from app.core.exceptions import PermissionDeniedError
 from app.modules.auth.model import User
 from app.modules.message.model import Message
 from tests.utils import init_test_container
@@ -19,7 +19,7 @@ def test_create_message_valid():
         Message(thread_id=thread1.id, message="test", user_id=user1.id)
     )
 
-    with pytest.raises(PermissionDenied):
+    with pytest.raises(PermissionDeniedError):
         create_msg_usc.create_message(
             Message(thread_id=thread1.id, message="test", user_id=user2.id)
         )

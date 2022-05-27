@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-05-16 14:49+0700\n"
+"POT-Creation-Date: 2022-05-27 21:15+0700\n"
 "PO-Revision-Date: 2022-05-13 22:11+0700\n"
 "Last-Translator: \n"
 "Language: vi\n"
 "Language-Team: vi <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.6.0\n"
+"Generated-By: Babel 2.10.1\n"
 
-#: app/core/exceptions.py:12
+#: app/core/exceptions.py:11
 msgid "Internal error"
 msgstr "Lỗi hệ thống đã xảy ra"
 
@@ -26,25 +26,29 @@ msgstr "Lỗi hệ thống đã xảy ra"
 msgid "User isn't in this thread"
 msgstr "Người dùng không ở trong luồng chat này"
 
-#: app/core/exceptions.py:49 app/modules/auth/exceptions.py:11
+#: app/core/exceptions.py:50 app/modules/auth/exceptions.py:11
 msgid "User not found"
 msgstr "Người dùng không tồn tại"
 
-#: app/core/exceptions.py:55
+#: app/core/exceptions.py:56
 msgid "You don't have permission to thread"
 msgstr "Bạn không có quyền trong luồng chat"
 
-#: app/core/exceptions.py:61
+#: app/core/exceptions.py:62
 msgid "Internal server error"
 msgstr "Lỗi server đã xảy ra"
 
-#: app/core/exceptions.py:66
+#: app/core/exceptions.py:68
 msgid "Unauthorized"
 msgstr "Chưa đăng nhập"
 
-#: app/core/exceptions.py:72
+#: app/core/exceptions.py:74
 msgid "Invalid parameters"
 msgstr "Tham số hệ thống sai"
+
+#: app/core/exceptions.py:80
+msgid "An database error has occured"
+msgstr "Lỗi database đã xảy ra"
 
 #: app/modules/auth/exceptions.py:6
 msgid "User existed"
@@ -52,7 +56,7 @@ msgstr "Người dùng đã tồn tại"
 
 #: app/modules/auth/exceptions.py:16
 msgid "Invalid password"
-msgstr ""
+msgstr "Mật khẩu không đúng"
 
 #: app/modules/message/exceptions.py:9
 #, fuzzy
@@ -61,7 +65,7 @@ msgstr "Người dùng không ở trong luồng chat này"
 
 #: app/modules/message/exceptions.py:12
 msgid "Message not found"
-msgstr ""
+msgstr "Không tìm thấy tin nhắn"
 
 #~ msgid "You dont have permission to this thread"
 #~ msgstr "Bạn không có quyền truy cập vào hội thoại này"

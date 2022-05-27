@@ -23,6 +23,7 @@ isort = "*"
 autoflake = "*"
 pre-commit = "*"
 black = "*"
+babel = "*"
 
 [requires]
 python_version = "3.9"

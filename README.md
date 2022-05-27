@@ -16,6 +16,7 @@ $ pipenv install
 ```bash
 $ cp config.yaml.example config.yaml
 $ # update your app config in config.yaml
+$ ./update_translation.sh
 $ pipenv run app
 ```
 
