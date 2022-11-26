@@ -9,8 +9,6 @@ You need to install [Pipenv](https://pipenv.pypa.io/en/latest/) in your machine.
 ```bash
 $ pipenv shell
 $ pipenv install
-$ pipenv install --dev
-$ pre-commit install # install pre-commit
 ```
 
 ## Run app
@@ -36,10 +34,7 @@ To show code coverage, just run:
 $ pipenv run test-cov
 ```
 
-In order to show code coverage in VsCode, you will need to install [Coverage Gutters extension](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters) and then generate `coverage.xml` file via command:
-```bash
-$ pipenv run test-cov-xml
-```
+In order to show code coverage in VsCode, you will need to install [Coverage Gutters extension](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters).
 
 ## Database migration
 
