@@ -1,6 +1,6 @@
 from app.core.exceptions import PermissionDeniedError, UserNotFoundError
 from app.core.usecase import AppUsecase
-from app.modules.thread.model import ChatThread
+from app.modules.thread.model import ChatThreadCreate
 
 
 class GetUserThreads(AppUsecase):
@@ -20,7 +20,7 @@ class GetThreadUsecase(AppUsecase):
 
 class CreateThreadUsecase(AppUsecase):
     def create_thread(self, name: str, owner_id: int):
-        thread = self.repo.thread.create(ChatThread(owner_id=owner_id, name=name))
+        thread = self.repo.thread.create(ChatThreadCreate(owner_id=owner_id, name=name))
         self.repo.thread.add_thread_member(thread.id, owner_id, "admin")
         return thread
 
@@ -37,7 +37,7 @@ class AddMemberToThread(AppUsecase):
     def add_member_to_thread(
         self, thread_id: int, user_id: int, target_user_id: int, role: str
     ):
-        thread_member = self.repo.thread.get_thread_member(self, thread_id, user_id)
+        thread_member = self.repo.thread.get_thread_member(thread_id, user_id)
         if not thread_member:
             raise PermissionDeniedError()
         if thread_member.role != "admin":
@@ -47,9 +47,7 @@ class AddMemberToThread(AppUsecase):
         if not target_user:
             raise UserNotFoundError()
 
-        thread_member = self.repo.thread.get_thread_member(
-            self, thread_id, target_user_id
-        )
+        thread_member = self.repo.thread.get_thread_member(thread_id, target_user_id)
         if thread_member:
             # already in the target thread, ignore
             return
@@ -58,7 +56,7 @@ class AddMemberToThread(AppUsecase):
 
 class RemoveMemberFromThreadUsecase(AppUsecase):
     def remove_member(self, thread_id: int, user_id: int, target_user_id: int):
-        thread_member = self.repo.thread.get_thread_member(self, thread_id, user_id)
+        thread_member = self.repo.thread.get_thread_member(thread_id, user_id)
         if not thread_member:
             raise PermissionDeniedError()
         if thread_member.role != "admin":

@@ -4,10 +4,8 @@ from pydantic import BaseModel
 
 from app.container import AppContainer
 from app.core.jwt import get_current_user
-from app.modules.thread.container import ThreadContainer
 
 from .usecases import (
-    AddMemberToThread,
     CreateThreadUsecase,
     GetThreadMembers,
     GetThreadUsecase,
@@ -15,7 +13,7 @@ from .usecases import (
     RemoveMemberFromThreadUsecase,
 )
 
-Container: ThreadContainer = AppContainer.thread
+Container = AppContainer.thread
 router = APIRouter(prefix="/threads", tags=["threads"])
 
 
@@ -64,17 +62,6 @@ def get_thread_members(
 ):
     thread_members = usecase.get_thread_members_for_user(thread_id, user_id)
     return {"data": thread_members}
-
-
-@router.delete("/{thread_id}/members")
-@inject
-def remove_member_from_thread(
-    thread_id: int,
-    user_id: int = Depends(get_current_user),
-    usecase: AddMemberToThread = Depends(Provide[Container.add_member_to_thread]),
-):
-    usecase.add_member_to_thread(thread_id, user_id)
-    return {"data": {"success": True}}
 
 
 class RemoveMemberRequest(BaseModel):

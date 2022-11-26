@@ -9,6 +9,8 @@ You need to install [Pipenv](https://pipenv.pypa.io/en/latest/) in your machine.
 ```bash
 $ pipenv shell
 $ pipenv install
+$ pipenv install --dev
+$ pre-commit install # install pre-commit
 ```
 
 ## Run app

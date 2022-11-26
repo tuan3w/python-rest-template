@@ -1,4 +1,3 @@
-
 from dependency_injector.wiring import Provide, inject
 from fastapi import Depends
 from pydantic import BaseModel
@@ -15,11 +14,12 @@ class UserInfoResponse(BaseModel):
     id: str
     username: str
 
-@router.get('/me')
+
+@router.get("/me")
 @inject
 def me(
     user_id: int = Depends(get_current_user),
-    usecase: MyInfoUsecase = Depends(Provide[AppContainer.auth.me])
+    usecase: MyInfoUsecase = Depends(Provide[AppContainer.auth.me]),
 ):
 
     user = usecase.get_user(user_id)

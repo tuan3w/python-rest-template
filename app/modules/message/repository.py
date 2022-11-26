@@ -1,4 +1,3 @@
-
 from abc import ABC, abstractmethod
 from typing import Optional
 
@@ -7,7 +6,7 @@ from .model import Message
 
 class MessageRepository(ABC):
     @abstractmethod
-    def get_thread_messages(self, thread_id: str, shared_session=None):
+    def get_thread_messages(self, thread_id: int, shared_session=None):
         pass
 
     @abstractmethod

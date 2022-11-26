@@ -21,7 +21,7 @@ def check_password(password: str, hashed_password: str) -> bool:
 
 
 def hash_password(password: str) -> str:
-    return hashpw(password.encode(), SALT_KEY)
+    return hashpw(password.encode(), SALT_KEY).decode()
 
 
 def sign_jwt(user_id: int, secret: str):

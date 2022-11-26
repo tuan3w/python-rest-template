@@ -1,3 +1,6 @@
+from dependency_injector import containers, providers
+from dependency_injector.containers import DeclarativeContainer
+
 from app.core.app import MyApp
 from app.core.conf import AppConf
 from app.core.database import Database
@@ -10,10 +13,6 @@ from app.modules.thread.container import ThreadContainer
 from app.modules.thread.infra.repository import SQLThreadRepository
 
 
-from dependency_injector import providers, containers
-from dependency_injector.containers import DeclarativeContainer
-
-
 class AppContainer(DeclarativeContainer):
     wiring_config = containers.WiringConfiguration(modules=["app"])
 
@@ -21,19 +20,12 @@ class AppContainer(DeclarativeContainer):
     app_conf = providers.Singleton(AppConf, conf)
 
     db = providers.Singleton(Database, conf=app_conf)
-    msg_repo = providers.Singleton(
-        SQLMessageRepository,
-        db=db.provided.session)
-    thread_repo = providers.Singleton(
-        SQLThreadRepository,
-        db=db.provided.session
-    )
-    user_repo = providers.Singleton(
-        SQLUserRepository,
-        db=db.provided.session
-    )
+    msg_repo = providers.Singleton(SQLMessageRepository, db=db.provided.session)
+    thread_repo = providers.Singleton(SQLThreadRepository, db=db.provided.session)
+    user_repo = providers.Singleton(SQLUserRepository, db=db.provided.session)
     app_repo = providers.Singleton(
-        AppRepository, user_repo=user_repo, thread_repo=thread_repo, msg_repo=msg_repo)
+        AppRepository, user_repo=user_repo, thread_repo=thread_repo, msg_repo=msg_repo
+    )
     app = providers.Singleton(
         MyApp,
         conf=app_conf,
@@ -41,15 +33,6 @@ class AppContainer(DeclarativeContainer):
     )
 
     # services
-    auth: AuthContainer = providers.Container(
-        AuthContainer,
-        app=app
-    )
-    thread: ThreadContainer = providers.Container(
-        ThreadContainer,
-        app=app
-    )
-    message: MessageContainer = providers.Container(
-        MessageContainer,
-        app=app
-    )
+    auth = providers.Container(AuthContainer, app=app)
+    thread = providers.Container(ThreadContainer, app=app)
+    message = providers.Container(MessageContainer, app=app)

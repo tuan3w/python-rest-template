@@ -3,8 +3,8 @@ from typing import List, Optional
 from sqlalchemy import Column, ForeignKey, Integer, String
 
 from app.core.repository import SQLRepository
-from app.modules.message.infra.repository import Base
-from app.modules.thread.model import ChatThread, ChatThreadMember
+from app.core.database import Base
+from app.modules.thread.model import ChatThread, ChatThreadCreate, ChatThreadMember
 from app.modules.thread.repository import ThreadRepository
 
 
@@ -24,8 +24,10 @@ class ChatThreadMemberInDb(Base):
 
 
 class SQLThreadRepository(SQLRepository, ThreadRepository):
-    def get_all_threads_for_user(self, user_id: str) -> List[ChatThread]:
-        with self.session_factory() as session:
+    def get_all_threads_for_user(
+        self, user_id: int, shared_session=None
+    ) -> List[ChatThread]:
+        with self.session_factory(shared_session) as session:
             threads = (
                 session.query(ChatThreadInDb)
                 .filter(ChatThreadInDb.owner_id == user_id)
@@ -33,7 +35,7 @@ class SQLThreadRepository(SQLRepository, ThreadRepository):
             )
             return [ChatThread.from_orm(thread) for thread in threads]
 
-    def get_by_id(self, thread_id: str, shared_session=None) -> Optional[ChatThread]:
+    def get_by_id(self, thread_id: int, shared_session=None) -> Optional[ChatThread]:
         with self.session_factory(shared_session) as session:
             thread = (
                 session.query(ChatThreadInDb)
@@ -44,9 +46,11 @@ class SQLThreadRepository(SQLRepository, ThreadRepository):
                 return None
             return ChatThread.from_orm(thread)
 
-    def create(self, thread: ChatThread, shared_session=None) -> ChatThread:
+    def create(
+        self, thread_create: ChatThreadCreate, shared_session=None
+    ) -> ChatThread:
         with self.session_factory(shared_session) as session:
-            item_db = ChatThreadInDb(**thread.dict())
+            item_db = ChatThreadInDb(**thread_create.dict())
             session.add(item_db)
 
             if not shared_session:

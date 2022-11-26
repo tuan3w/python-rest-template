@@ -1,15 +1,15 @@
 import pytest
 
 from app.core.exceptions import PermissionDeniedError
-from app.modules.auth.model import User
+from app.modules.auth.model import UserCreate
 from app.modules.message.model import Message
 from tests.utils import init_test_container
 
 
 def test_create_message_valid():
     container = init_test_container()
-    user1 = container.user_repo().create(User(username="test1", password="test"))
-    user2 = container.user_repo().create(User(username="test2", password="test"))
+    user1 = container.user_repo().create(UserCreate(username="test1", password="test"))
+    user2 = container.user_repo().create(UserCreate(username="test2", password="test"))
 
     create_thread_usc = container.thread.create_thread()
     thread1 = create_thread_usc.create_thread("test1", user1.id)

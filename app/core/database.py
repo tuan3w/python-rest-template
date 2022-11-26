@@ -1,7 +1,7 @@
-from contextlib import AbstractContextManager, contextmanager
-from typing import Callable
+from contextlib import contextmanager
 
 from sqlalchemy import create_engine, orm
+from typing import Optional
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session
 
@@ -26,14 +26,12 @@ class Database:
         Base.metadata.create_all(self._engine)
 
     @contextmanager
-    def session(
-        self, session: Session = None
-    ) -> Callable[..., AbstractContextManager[Session]]:
+    def session(self, session: Optional[Session] = None):
         if session is not None:
-            # user has to handle session themselve
             yield session
+            return
 
-        session: Session = self._session_factory()
+        session = self._session_factory()
         try:
             yield session
         except Exception as e:

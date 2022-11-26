@@ -1,8 +1,7 @@
-
 from bcrypt import checkpw, hashpw
 
 # SALT_KEY=gensalt()
-SALT_KEY = b'$2b$12$C7d8F1zsAN7BPTcR1KzIru'
+SALT_KEY = b"$2b$12$C7d8F1zsAN7BPTcR1KzIru"
 
 
 def check_password(password: str, hashed_password: str) -> bool:
@@ -10,4 +9,4 @@ def check_password(password: str, hashed_password: str) -> bool:
 
 
 def hash_password(password: str) -> str:
-    return hashpw(password.encode(), SALT_KEY)
+    return hashpw(password.encode(), SALT_KEY).decode()

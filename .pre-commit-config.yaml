@@ -1,22 +1,40 @@
+exclude: >
+  (?x)(
+      LICENSE$|
+      ^alembic/|
+  )
+fail_fast: true
 repos:
   - repo: local
     hooks:
-    - id: autoflake
-      name: Remove unused variables and imports
-      entry: autoflake
-      language: python
-      args: ["--in-place", "--remove-all-unused-imports", "--remove-unused-variables", "--expand-star-imports"]
-      types: [python]
-      require_serial: true
-    - id: isort
-      name: Sorting import statements
-      entry: bash -c 'isort "$@"; git add -u' --
-      language: python
-      args: ["--filter-files"]
-      files: \.py$
-    - id: black
-      name: Black Python code formatting
-      entry: bash -c 'black "$@"; git add -u' --
-      language: python
-      types: [python]
-      args: ["--line-length=88"]
+      - id: autoflake
+        name: Remove unused variables and imports
+        entry: bash -c 'autoflake "$@"; git add -u' --
+        language: python
+        args:
+          ["--in-place", "--remove-all-unused-imports", "--expand-star-imports"]
+        types: [python]
+        require_serial: true
+        files: \.py$
+      - id: isort
+        name: Sorting import statements
+        entry: bash -c 'isort "$@"; git add -u' --
+        language: python
+        args: ["--profile", "black"]
+        types: [python]
+        require_serial: true
+        files: \.py$
+      - id: black
+        name: Black Python code formatting
+        entry: bash -c 'black "$@"; git add -u' --
+        language: python
+        types: [python]
+        require_serial: true
+        files: \.py$
+      - id: mypy
+        name: Check errors with mypy
+        files: '.*\.py[i]?'
+        entry: mypy
+        language: python
+        types: [python]
+        require_serial: true
