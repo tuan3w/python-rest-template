@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 from app.container import AppContainer
 from app.core.jwt import get_current_user
-from app.modules.message.model import Message
+from app.modules.messages.model import Message
 
 from .usecases import (
     CreateThreadMessageUsecase,

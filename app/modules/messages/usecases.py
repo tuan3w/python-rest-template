@@ -1,7 +1,7 @@
 from app.core.exceptions import PermissionDeniedError
 from app.core.usecase import AppUsecase
-from app.modules.message.exceptions import MessageNotFound, ThreadNotFound
-from app.modules.message.model import Message
+from app.modules.messages.exceptions import MessageNotFound, ThreadNotFound
+from app.modules.messages.model import Message
 
 
 class GetThreadMessagesUsecase(AppUsecase):

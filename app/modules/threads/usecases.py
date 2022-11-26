@@ -1,6 +1,6 @@
 from app.core.exceptions import PermissionDeniedError, UserNotFoundError
 from app.core.usecase import AppUsecase
-from app.modules.thread.model import ChatThreadCreate
+from app.modules.threads.model import ChatThreadCreate
 
 
 class GetUserThreads(AppUsecase):

@@ -7,8 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.container import AppContainer
 from app.core.exceptions import add_error_handlers
-from app.modules.message.router import router as msg_router
-from app.modules.thread.router import router as thread_router
+from app.modules.messages.router import router as msg_router
+from app.modules.threads.router import router as thread_router
 
 
 @inject

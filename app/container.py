@@ -7,10 +7,10 @@ from app.core.database import Database
 from app.core.repository import AppRepository
 from app.modules.auth.container import AuthContainer
 from app.modules.auth.infra.repository import SQLUserRepository
-from app.modules.message.container import MessageContainer
-from app.modules.message.infra.repository import SQLMessageRepository
-from app.modules.thread.container import ThreadContainer
-from app.modules.thread.infra.repository import SQLThreadRepository
+from app.modules.messages.container import MessageContainer
+from app.modules.messages.infra.repository import SQLMessageRepository
+from app.modules.threads.container import ThreadContainer
+from app.modules.threads.infra.repository import SQLThreadRepository
 
 
 class AppContainer(DeclarativeContainer):

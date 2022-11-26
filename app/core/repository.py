@@ -1,6 +1,6 @@
 from app.modules.auth.repository import UserRepository
-from app.modules.message.repository import MessageRepository
-from app.modules.thread.repository import ThreadRepository
+from app.modules.messages.repository import MessageRepository
+from app.modules.threads.repository import ThreadRepository
 
 
 class AppRepository(object):

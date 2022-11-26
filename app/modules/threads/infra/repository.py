@@ -4,8 +4,8 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 
 from app.core.database import Base
 from app.core.repository import SQLRepository
-from app.modules.thread.model import ChatThread, ChatThreadCreate, ChatThreadMember
-from app.modules.thread.repository import ThreadRepository
+from app.modules.threads.model import ChatThread, ChatThreadCreate, ChatThreadMember
+from app.modules.threads.repository import ThreadRepository
 
 
 class ChatThreadInDb(Base):

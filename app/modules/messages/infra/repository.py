@@ -4,7 +4,7 @@ from sqlalchemy import Column, Integer, String
 
 from app.core.database import Base
 from app.core.repository import SQLRepository
-from app.modules.message.model import Message
+from app.modules.messages.model import Message
 
 from ..repository import MessageRepository
 
