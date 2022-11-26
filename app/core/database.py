@@ -1,7 +1,7 @@
 from contextlib import contextmanager
+from typing import Optional
 
 from sqlalchemy import create_engine, orm
-from typing import Optional
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session
 

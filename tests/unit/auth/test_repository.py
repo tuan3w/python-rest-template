@@ -1,5 +1,5 @@
-from app.modules.auth.model import UserCreate
 from app.container import AppContainer
+from app.modules.auth.model import UserCreate
 
 
 def test_repository(container: AppContainer):

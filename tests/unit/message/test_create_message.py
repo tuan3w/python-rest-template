@@ -1,9 +1,9 @@
 import pytest
 
+from app.container import AppContainer
 from app.core.exceptions import PermissionDeniedError
 from app.modules.auth.model import UserCreate
 from app.modules.message.model import Message
-from app.container import AppContainer
 
 
 def test_create_message_valid(container: AppContainer):

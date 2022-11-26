@@ -10,6 +10,7 @@ from app.core.exceptions import add_error_handlers
 from app.modules.message.router import router as msg_router
 from app.modules.thread.router import router as thread_router
 
+
 @inject
 def create_app() -> FastAPI:
     # disable sqlalchemy logging

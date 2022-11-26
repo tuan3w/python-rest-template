@@ -2,10 +2,10 @@ from typing import Optional
 
 from sqlalchemy import Column, Integer, String
 
+from app.core.database import Base
 from app.core.repository import SQLRepository
 from app.modules.auth.model import User, UserCreate
 from app.modules.auth.repository import UserRepository
-from app.core.database import Base
 
 
 class UserInDb(Base):
