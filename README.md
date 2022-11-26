@@ -2,7 +2,11 @@
 
 A clean Python template for your next REST projects.
 
+## Features
 
+- [x] Scalable folder structure
+- [x] Consistent style, be productive with useful pre-commit hooks
+- [x] i18n support
 ## Setup
 You need to install [Pipenv](https://pipenv.pypa.io/en/latest/) in your machine.
 
