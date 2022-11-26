@@ -7,6 +7,12 @@ A clean Python template for your next REST projects.
 - [x] Scalable folder structure
 - [x] Consistent style, be productive with useful pre-commit hooks
 - [x] i18n support
+
+## Sample App
+
+This repo contains a demo for a chat app. You can create threads, messages.
+Here are all APIs in the repo:
+![chat-app](./sample-api.png)
 ## Setup
 You need to install [Pipenv](https://pipenv.pypa.io/en/latest/) in your machine.
 
