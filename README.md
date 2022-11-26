@@ -17,17 +17,18 @@ Here are all APIs in the repo:
 You need to install [Pipenv](https://pipenv.pypa.io/en/latest/) in your machine.
 
 ```bash
-$ pipenv shell
-$ pipenv install
+pipenv shell
+pipenv install
+pipenv install --dev
+pre-commit install # install pre-commit hooks
 ```
 
 ## Run app
 
 ```bash
-$ cp config.yaml.example config.yaml
-$ # update your app config in config.yaml
-$ ./update_translation.sh
-$ pipenv run app
+cp config.yaml.example config.yaml
+# update your app config in config.yaml
+pipenv run app
 ```
 
 Now, you can check API docs located at http://localhost:8000/docs .
@@ -35,13 +36,13 @@ Now, you can check API docs located at http://localhost:8000/docs .
 ## Test apps
 
 ```bash
-$ pipenv run test
+pipenv run test
 ```
 
 To show code coverage, just run:
 
 ```bash
-$ pipenv run test-cov
+pipenv run test-cov
 ```
 
 In order to show code coverage in VsCode, you will need to install [Coverage Gutters extension](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters).
@@ -49,17 +50,17 @@ In order to show code coverage in VsCode, you will need to install [Coverage Gut
 ## Database migration
 
 ```bash
-$ cp alembic.ini.example alembic.ini
-$ # update alembic.ini config file
-$ alembic upgrade head
+cp alembic.ini.example alembic.ini
+# update alembic.ini config file
+alembic upgrade head
 ```
 
 ## Error code localization with i18n
 
 ```bash
-$ ./extract_messages.sh
-$ # update your translation in `base.po` files
-$ ./update_translation.sh
+./extract_messages.sh
+# update your translation in `base.po` files
+./update_translation.sh
 ```
 
 ## License
