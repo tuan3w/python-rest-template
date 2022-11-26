@@ -8,8 +8,8 @@ from tests.utils import init_test_container
 def test_register():
     container = init_test_container()
     usecase: RegisterUserUsecase = container.auth.register()
-    u = usecase.register('test', 'test')
+    u = usecase.register("test", "test")
     assert u != None
 
     with pytest.raises(UserExistedError):
-        usecase.register('test', 'test')
+        usecase.register("test", "test")

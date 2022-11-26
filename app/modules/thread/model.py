@@ -3,10 +3,13 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class ChatThread(BaseModel):
-    id: Optional[int]
+class ChatThreadCreate(BaseModel):
     owner_id: int
     name: str
+
+
+class ChatThread(ChatThreadCreate):
+    id: int
 
     class Config:
         orm_mode = True

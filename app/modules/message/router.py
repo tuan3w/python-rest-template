@@ -4,16 +4,15 @@ from pydantic import BaseModel
 
 from app.container import AppContainer
 from app.core.jwt import get_current_user
-from app.modules.message.container import MessageContainer
 
 from .usecases import (
     CreateThreadMessageUsecase,
     DeleteThreadMessageUsecase,
     GetThreadMessagesUsecase,
-    Message,
 )
+from app.modules.message.model import Message
 
-Container: MessageContainer = AppContainer.message
+Container = AppContainer.message
 router = APIRouter(prefix="/threads/{thread_id}/messages", tags=["messages"])
 
 

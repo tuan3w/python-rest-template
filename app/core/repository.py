@@ -1,8 +1,3 @@
-from contextlib import AbstractContextManager
-from typing import Callable
-
-from sqlalchemy.orm import Session
-
 from app.modules.auth.repository import UserRepository
 from app.modules.message.repository import MessageRepository
 from app.modules.thread.repository import ThreadRepository
@@ -21,5 +16,6 @@ class AppRepository(object):
 
 
 class SQLRepository(object):
-    def __init__(self, db: Callable[..., AbstractContextManager[Session]]) -> None:
+    # def __init__(self, db: Callable[..., AbstractContextManager[Session]]) -> None:
+    def __init__(self, db):
         self.session_factory = db

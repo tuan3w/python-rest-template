@@ -1,6 +1,8 @@
 from dependency_injector import providers
 from dependency_injector.containers import DeclarativeContainer
 
+from app.core.app import MyApp
+
 from .usecases import (
     AddMemberToThread,
     CreateThreadUsecase,
@@ -12,7 +14,7 @@ from .usecases import (
 
 
 class ThreadContainer(DeclarativeContainer):
-    app = providers.Dependency()
+    app = providers.Dependency(MyApp)
     get_user_threads = providers.Singleton(GetUserThreads, app)
     get_thread = providers.Singleton(GetThreadUsecase, app)
     create_thread = providers.Singleton(CreateThreadUsecase, app)

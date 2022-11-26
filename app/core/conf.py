@@ -4,4 +4,4 @@ class AppConf(object):
         self.jwt_secret: str = conf["jwt_secret"]
 
     def __repr__(self) -> str:
-        return '<Config db_url={} jwt_secret={}>'.format(self.db_url, self.jwt_secret)
+        return "<Config db_url={} jwt_secret={}>".format(self.db_url, self.jwt_secret)

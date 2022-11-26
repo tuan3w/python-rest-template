@@ -11,7 +11,7 @@ from .usecases import (
 
 
 class MessageContainer(DeclarativeContainer):
-    app: MyApp = providers.Dependency()
+    app = providers.Dependency(MyApp)
     get_thread_messages = providers.Singleton(GetThreadMessagesUsecase, app)
     create_thread_message = providers.Singleton(CreateThreadMessageUsecase, app)
     delete_thread_message = providers.Singleton(DeleteThreadMessageUsecase, app)

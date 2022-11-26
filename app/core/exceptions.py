@@ -1,4 +1,5 @@
 from asyncio.log import logger
+from typing import Any, Optional
 
 from fastapi import FastAPI, Request
 from fastapi.encoders import jsonable_encoder
@@ -15,8 +16,8 @@ class AppException(Exception):
 
     def __init__(
         self,
-        code: int = None,
-        error_details: any = None,
+        code: Optional[int] = None,
+        error_details: Any = None,
         **params,
     ):
         self.code = code
@@ -108,7 +109,7 @@ def add_error_handlers(app: FastAPI) -> None:
         req: Request, err: RequestValidationError
     ):
         new_err = ParamError(error_details=err.errors())
-        _translate_error_message(err, req)
+        _translate_error_message(new_err, req)
 
         return JSONResponse(
             status_code=new_err.http_code, content=jsonable_encoder(new_err.to_json())

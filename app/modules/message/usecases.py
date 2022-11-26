@@ -35,7 +35,7 @@ class DeleteThreadMessageUsecase(AppUsecase):
         msg = self.repo.message.get_by_id(msg_id)
         if not msg:
             raise MessageNotFound()
-        if msg.owner_id != user_id:
+        if msg.user_id != user_id:
             raise PermissionDeniedError()
 
         msg = self.repo.message.get_by_id(msg_id)

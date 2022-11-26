@@ -1,11 +1,16 @@
 from typing import Optional
+
 from pydantic import BaseModel
 
 
-class User(BaseModel):
-    id: Optional[int]
+class UserCreate(BaseModel):
+    id: Optional[int] = None
     username: str
     password: str
+
+
+class User(UserCreate):
+    id: int
 
     class Config:
         orm_mode = True

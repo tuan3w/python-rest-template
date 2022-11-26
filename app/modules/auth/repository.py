@@ -1,17 +1,18 @@
-
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from .model import User
+from .model import User, UserCreate
 
 
 class UserRepository(ABC):
     @abstractmethod
-    def get_user_by_username(self, username: str, shared_session=None) -> Optional[User]:
+    def get_user_by_username(
+        self, username: str, shared_session=None
+    ) -> Optional[User]:
         pass
 
     @abstractmethod
-    def create(self, user: User, shared_session=None) -> User:
+    def create(self, user: UserCreate, shared_session=None) -> User:
         pass
 
     @abstractmethod
