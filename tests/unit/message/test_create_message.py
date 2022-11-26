@@ -3,11 +3,10 @@ import pytest
 from app.core.exceptions import PermissionDeniedError
 from app.modules.auth.model import UserCreate
 from app.modules.message.model import Message
-from tests.utils import init_test_container
+from app.container import AppContainer
 
 
-def test_create_message_valid():
-    container = init_test_container()
+def test_create_message_valid(container: AppContainer):
     user1 = container.user_repo().create(UserCreate(username="test1", password="test"))
     user2 = container.user_repo().create(UserCreate(username="test2", password="test"))
 

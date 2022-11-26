@@ -1,9 +1,8 @@
 from app.modules.auth.model import UserCreate
-from tests.utils import init_test_container
+from app.container import AppContainer
 
 
-def test_repository():
-    container = init_test_container()
+def test_repository(container: AppContainer):
     auth_repo = container.user_repo()
 
     user = auth_repo.get_by_id(1)

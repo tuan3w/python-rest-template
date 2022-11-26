@@ -1,9 +1,7 @@
 from app.modules.auth.model import UserCreate
-from tests.utils import init_test_container
+from app.container import AppContainer
 
-
-def test_create_thread():
-    container = init_test_container()
+def test_create_thread(container: AppContainer):
     user1 = container.user_repo().create(UserCreate(username="test1", password="test"))
 
     create_thread_usc = container.thread.create_thread()

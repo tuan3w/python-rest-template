@@ -1,8 +1,7 @@
-from tests.utils import init_test_container
+from app.container import AppContainer
 
 
-def test_db_session_rollback():
-    container = init_test_container()
+def test_db_session_rollback(container: AppContainer):
     db = container.db()
     user_repo = container.user_repo()
 
